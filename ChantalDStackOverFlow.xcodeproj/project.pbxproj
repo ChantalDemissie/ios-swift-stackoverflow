@@ -22,6 +22,7 @@
 		5C01BD65235FFBE200BDB197 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C01BD67235FFBE200BDB197 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C01BD6D2360102400BDB197 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../../.Trash/Main.storyboard; sourceTree = "<group>"; };
+		5CE627AF2360BE1D007D288F /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +55,7 @@
 		5C01BD5A235FFBE100BDB197 /* ChantalDStackOverFlow */ = {
 			isa = PBXGroup;
 			children = (
+				5CE627AE2360BE14007D288F /* Test */,
 				5C01BD5B235FFBE100BDB197 /* AppDelegate.swift */,
 				5C01BD5D235FFBE100BDB197 /* ViewController.swift */,
 				5C01BD6D2360102400BDB197 /* Main.storyboard */,
@@ -62,6 +64,14 @@
 				5C01BD67235FFBE200BDB197 /* Info.plist */,
 			);
 			path = ChantalDStackOverFlow;
+			sourceTree = "<group>";
+		};
+		5CE627AE2360BE14007D288F /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				5CE627AF2360BE1D007D288F /* Main.storyboard */,
+			);
+			path = Test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
