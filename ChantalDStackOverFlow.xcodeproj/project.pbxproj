@@ -11,16 +11,22 @@
 		5C01BD5E235FFBE100BDB197 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01BD5D235FFBE100BDB197 /* ViewController.swift */; };
 		5C01BD63235FFBE200BDB197 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C01BD62235FFBE200BDB197 /* Assets.xcassets */; };
 		5C01BD66235FFBE200BDB197 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C01BD64235FFBE200BDB197 /* LaunchScreen.storyboard */; };
+		5CE627B02360FBA5007D288F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CE627AF2360BE1D007D288F /* Main.storyboard */; };
+		B6994924AC337CCD32CA54C2 /* Pods_ChantalDStackOverFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F4F3395CFDF94706B63009 /* Pods_ChantalDStackOverFlow.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		46F4F3395CFDF94706B63009 /* Pods_ChantalDStackOverFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChantalDStackOverFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C01BD58235FFBE100BDB197 /* ChantalDStackOverFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChantalDStackOverFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C01BD5B235FFBE100BDB197 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C01BD5D235FFBE100BDB197 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5C01BD62235FFBE200BDB197 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C01BD65235FFBE200BDB197 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C01BD67235FFBE200BDB197 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C89406423615C51002C5C34 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		5CE627AF2360BE1D007D288F /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		91084DDE7C385B2F331A2417 /* Pods-ChantalDStackOverFlow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChantalDStackOverFlow.debug.xcconfig"; path = "Target Support Files/Pods-ChantalDStackOverFlow/Pods-ChantalDStackOverFlow.debug.xcconfig"; sourceTree = "<group>"; };
+		936EBF310117609DE535A7A5 /* Pods-ChantalDStackOverFlow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChantalDStackOverFlow.release.xcconfig"; path = "Target Support Files/Pods-ChantalDStackOverFlow/Pods-ChantalDStackOverFlow.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6994924AC337CCD32CA54C2 /* Pods_ChantalDStackOverFlow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,6 +46,8 @@
 			children = (
 				5C01BD5A235FFBE100BDB197 /* ChantalDStackOverFlow */,
 				5C01BD59235FFBE100BDB197 /* Products */,
+				8333F7A916487A5603DE6499 /* Pods */,
+				8C7E6DF38F60714C2BE4882D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +72,24 @@
 			path = ChantalDStackOverFlow;
 			sourceTree = "<group>";
 		};
+		8333F7A916487A5603DE6499 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				91084DDE7C385B2F331A2417 /* Pods-ChantalDStackOverFlow.debug.xcconfig */,
+				936EBF310117609DE535A7A5 /* Pods-ChantalDStackOverFlow.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8C7E6DF38F60714C2BE4882D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5C89406423615C51002C5C34 /* Podfile */,
+				46F4F3395CFDF94706B63009 /* Pods_ChantalDStackOverFlow.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -70,9 +97,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5C01BD6A235FFBE200BDB197 /* Build configuration list for PBXNativeTarget "ChantalDStackOverFlow" */;
 			buildPhases = (
+				D9C158DB458233696EE3E333 /* [CP] Check Pods Manifest.lock */,
 				5C01BD54235FFBE100BDB197 /* Sources */,
 				5C01BD55235FFBE100BDB197 /* Frameworks */,
 				5C01BD56235FFBE100BDB197 /* Resources */,
+				5C2DE6F0A2C910250E8CB99B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -122,12 +151,56 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CE627B02360FBA5007D288F /* Main.storyboard in Resources */,
 				5C01BD66235FFBE200BDB197 /* LaunchScreen.storyboard in Resources */,
 				5C01BD63235FFBE200BDB197 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5C2DE6F0A2C910250E8CB99B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChantalDStackOverFlow/Pods-ChantalDStackOverFlow-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChantalDStackOverFlow/Pods-ChantalDStackOverFlow-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9C158DB458233696EE3E333 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChantalDStackOverFlow-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5C01BD54235FFBE100BDB197 /* Sources */ = {
@@ -270,6 +343,7 @@
 		};
 		5C01BD6B235FFBE200BDB197 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91084DDE7C385B2F331A2417 /* Pods-ChantalDStackOverFlow.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -284,6 +358,7 @@
 		};
 		5C01BD6C235FFBE200BDB197 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 936EBF310117609DE535A7A5 /* Pods-ChantalDStackOverFlow.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
