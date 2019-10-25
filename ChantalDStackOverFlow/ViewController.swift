@@ -3,10 +3,10 @@ import Foundation
 import Alamofire
 
 struct Question: Decodable {
-    let title: String 
+    let title: String
     //let question_id: Int
     //let body: String
-    //let answer_id: Int
+    let accepted_answer_id: Int?
     //let is_accepted: Bool
     //let profile_image: string
     
@@ -58,10 +58,19 @@ class ViewController: UIViewController, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = questions[indexPath.row].title
+        let question = questions[indexPath.row]
+        cell.textLabel?.text = question.title
+        if question.accepted_answer_id != nil {
+              cell.accessoryType = .checkmark
+        }
+      
         return cell
     }
 }
+
+
+
+
 
 
 /**
@@ -114,6 +123,8 @@ TYPE string
 https://developer.apple.com/documentation/uikit/uitableviewdatasource
  
 https://developer.apple.com/documentation/uikit/views_and_controls/table_views/filling_a_table_with_data
- 
+
 https://grokswift.com/json-swift-4/
+ 
+// https://guides.codepath.com/ios/Table-View-Guide
  */
