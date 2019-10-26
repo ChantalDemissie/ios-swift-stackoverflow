@@ -6,8 +6,8 @@ struct Question: Decodable {
     let title: String
     //let question_id: Int
     //let body: String
+    //let is_answered: Bool
     let accepted_answer_id: Int?
-    //let is_accepted: Bool
     //let profile_image: string
     
 }
@@ -16,8 +16,19 @@ struct QuestionsResponse: Decodable {
     let items: [Question]
 }
 
+// source: https://stackoverflow.com/a/47480859
+extension String {
+    var htmlDecoded: String {
+        let decoded = try? NSAttributedString(data: Data(utf8), options: [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+            ], documentAttributes: nil).string
+        
+        return decoded ?? self
+    }
+}
 
-class ViewController: UIViewController, UITableViewDataSource {
+class QuestionsViewController: UIViewController, UITableViewDataSource {
     var questions: [Question] = Array()
 
     @IBOutlet weak var tableView: UITableView!
@@ -53,25 +64,19 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return questions.count
+        return questions.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let question = questions[indexPath.row]
-        cell.textLabel?.text = question.title
+        cell.textLabel?.text = question.title.htmlDecoded
         if question.accepted_answer_id != nil {
-              cell.accessoryType = .checkmark
+            cell.accessoryType = .checkmark
         }
-      
         return cell
     }
 }
-
-
-
-
-
 
 /**
 
