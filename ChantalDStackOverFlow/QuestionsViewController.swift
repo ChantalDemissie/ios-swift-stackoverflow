@@ -2,31 +2,6 @@ import UIKit
 import Foundation
 import Alamofire
 
-struct Question: Decodable {
-    let title: String
-    let question_id: Int
-    //let body: String
-    //let is_answered: Bool
-    let accepted_answer_id: Int?
-    //let profile_image: string
-    
-}
-
-struct QuestionsResponse: Decodable {
-    let items: [Question]
-}
-
-// source: https://stackoverflow.com/a/47480859
-extension String {
-    var htmlDecoded: String {
-        let decoded = try? NSAttributedString(data: Data(utf8), options: [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-            ], documentAttributes: nil).string
-        
-        return decoded ?? self
-    }
-}
 
 class QuestionsViewController: UIViewController {
     var questions: [Question] = Array()
@@ -40,6 +15,8 @@ class QuestionsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         
         let questionsUrl = "http://api.stackexchange.com/2.2/questions?order=desc&sort=activity&site=stackoverflow"
         
@@ -92,10 +69,17 @@ extension QuestionsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let question = questions[indexPath.row]
         cell.textLabel?.text = question.title.htmlDecoded
+        // Used for auto-sizing cell height. Source: https://stackoverflow.com/a/48585451
+        cell.textLabel?.numberOfLines = 0
         if question.accepted_answer_id != nil {
             cell.accessoryType = .checkmark
         }
         return cell
+    }
+    
+    // UITableView.automaticDimension calculates height of label contents/text
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
 
