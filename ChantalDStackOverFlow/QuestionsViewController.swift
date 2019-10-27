@@ -4,7 +4,7 @@ import Alamofire
 
 struct Question: Decodable {
     let title: String
-    //let question_id: Int
+    let question_id: Int
     //let body: String
     //let is_answered: Bool
     let accepted_answer_id: Int?
@@ -28,8 +28,9 @@ extension String {
     }
 }
 
-class QuestionsViewController: UIViewController, UITableViewDataSource {
+class QuestionsViewController: UIViewController {
     var questions: [Question] = Array()
+    var selectedQuestion: Question? = nil
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -37,6 +38,8 @@ class QuestionsViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         
         tableView.dataSource = self
+        tableView.delegate = self
+        
         
         let questionsUrl = "http://api.stackexchange.com/2.2/questions?order=desc&sort=activity&site=stackoverflow"
         
@@ -63,6 +66,24 @@ class QuestionsViewController: UIViewController, UITableViewDataSource {
         }
     }
     
+    // This function is called before the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // get a reference to the second view controller
+        let answersViewController = segue.destination as! AnswersViewController
+        
+        // set a variable in the second view controller
+        if let selectedQuestion = selectedQuestion {
+            answersViewController.questionId = selectedQuestion.question_id
+        } else {
+            //TODO: show error message to user
+        }
+        
+    }
+
+}
+
+extension QuestionsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return questions.count
     }
@@ -75,6 +96,16 @@ class QuestionsViewController: UIViewController, UITableViewDataSource {
             cell.accessoryType = .checkmark
         }
         return cell
+    }
+}
+
+extension QuestionsViewController: UITableViewDelegate {
+    // method to run when table view cell is tapped
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        selectedQuestion = questions[indexPath.row]
+        // Segue to the answers view controller
+        self.performSegue(withIdentifier: "answers", sender: self)
     }
 }
 
@@ -132,4 +163,5 @@ https://developer.apple.com/documentation/uikit/views_and_controls/table_views/f
 https://grokswift.com/json-swift-4/
  
 // https://guides.codepath.com/ios/Table-View-Guide
- */
+     */
+
