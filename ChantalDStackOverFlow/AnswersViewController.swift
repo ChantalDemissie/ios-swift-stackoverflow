@@ -82,7 +82,11 @@ extension AnswersViewController: UITableViewDataSource {
             } else if let answers = question.answers { // row > 1
                 // first two rows are question title and body,
                 // so need to subtract 2 from row index to get answer index
-                cell.textLabel?.text = answers[indexPath.row - 2].body?.htmlDecoded
+                let answer = answers[indexPath.row - 2]
+                cell.textLabel?.text = answer.body?.htmlDecoded
+                if answer.is_accepted {
+                    cell.accessoryType = .checkmark
+                }
             }
         }
         return cell
