@@ -75,18 +75,15 @@ extension AnswersViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.numberOfLines = 0
         if let question = question {
-            if indexPath.row == 0 {
+            if indexPath.row == 0 { // title
                 cell.textLabel?.text = question.title.htmlDecoded
-                let imageUrl = URL(string: question.owner.profile_image)
-                URLSession.shared.dataTask(with: imageUrl!) { (data, urlResponse, error) in
-                    DispatchQueue.main.async {
-                        if let data = data {
-                            cell.imageView?.image = UIImage(data: data)
-                        }
-                    }
-                    }.resume()
-            } else if indexPath.row == 1 {
+                if let profileImage = question.owner.profile_image {
+                    getProfileImage(profileImage: profileImage, cell: cell)
+                }
+                cell.backgroundColor = .lightGray
+            } else if indexPath.row == 1 { // body
                 cell.textLabel?.text = question.body?.htmlDecoded
+                cell.backgroundColor = .cyan
             } else if let answers = question.answers { // row > 1
                 // first two rows are question title and body,
                 // so need to subtract 2 from row index to get answer index
@@ -95,14 +92,11 @@ extension AnswersViewController: UITableViewDataSource {
                 if answer.is_accepted {
                     cell.accessoryType = .checkmark
                 }
-                let imageUrl = URL(string: answer.owner.profile_image)
-                URLSession.shared.dataTask(with: imageUrl!) { (data, urlResponse, error) in
-                    DispatchQueue.main.async {
-                        if let data = data {
-                            cell.imageView?.image = UIImage(data: data)
-                        }
-                    }
-                    }.resume()
+                if let profileImage = answer.owner.profile_image {
+                    getProfileImage(profileImage: profileImage, cell: cell)
+                }
+                // peach
+                cell.backgroundColor = UIColor(red: 255/255, green: 218/255, blue: 185/255, alpha: 1)
             }
         }
         return cell

@@ -5,7 +5,7 @@
 //  Created by Demissie, Chantal (Contractor) on 10/26/19.
 //  Copyright © 2019 Demissie, Chantal (Contractor). All rights reserved.
 //
-
+import UIKit
 import Foundation
 
 struct Question: Decodable {
@@ -29,12 +29,9 @@ struct Answer: Decodable {
     let owner: ShallowUser
 }
 
-// maybe print the amount of answers answers.count so user can see how many answeres there are.
-// this would be a good way to differentiate between the different answers
-// get image data from url first then convert data to UIImage and assign to imageview.
 struct ShallowUser: Decodable {
-    let display_name: String
-    let profile_image: String
+    let display_name: String?
+    let profile_image: String?
 }
 
 // source: https://stackoverflow.com/a/47480859
@@ -49,6 +46,14 @@ extension String {
     }
 }
 
+func getProfileImage(profileImage: String, cell: UITableViewCell) {
+    let imageUrl = URL(string: profileImage)
+    URLSession.shared.dataTask(with: imageUrl!) { (data, urlResponse, error) in
+        DispatchQueue.main.async {
+            if let data = data {
+                cell.imageView?.image = UIImage(data: data)
+            }
+        }
+    }.resume()
+}
 
-
-//https://stackoverflow.com/questions/56184147/how-to-display-json-image-on-custom-cell-of-tableview-in-swift/56184328
