@@ -74,6 +74,14 @@ extension QuestionsViewController: UITableViewDataSource {
         if question.accepted_answer_id != nil {
             cell.accessoryType = .checkmark
         }
+        let imageUrl = URL(string: question.owner.profile_image)
+        URLSession.shared.dataTask(with: imageUrl!) { (data, urlResponse, error) in
+             DispatchQueue.main.async {
+                if let data = data {
+                    cell.imageView?.image = UIImage(data: data)
+                }
+            }
+        }.resume()
         return cell
     }
     

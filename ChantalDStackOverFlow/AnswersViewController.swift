@@ -77,6 +77,14 @@ extension AnswersViewController: UITableViewDataSource {
         if let question = question {
             if indexPath.row == 0 {
                 cell.textLabel?.text = question.title.htmlDecoded
+                let imageUrl = URL(string: question.owner.profile_image)
+                URLSession.shared.dataTask(with: imageUrl!) { (data, urlResponse, error) in
+                    DispatchQueue.main.async {
+                        if let data = data {
+                            cell.imageView?.image = UIImage(data: data)
+                        }
+                    }
+                    }.resume()
             } else if indexPath.row == 1 {
                 cell.textLabel?.text = question.body?.htmlDecoded
             } else if let answers = question.answers { // row > 1
@@ -87,6 +95,14 @@ extension AnswersViewController: UITableViewDataSource {
                 if answer.is_accepted {
                     cell.accessoryType = .checkmark
                 }
+                let imageUrl = URL(string: answer.owner.profile_image)
+                URLSession.shared.dataTask(with: imageUrl!) { (data, urlResponse, error) in
+                    DispatchQueue.main.async {
+                        if let data = data {
+                            cell.imageView?.image = UIImage(data: data)
+                        }
+                    }
+                    }.resume()
             }
         }
         return cell
