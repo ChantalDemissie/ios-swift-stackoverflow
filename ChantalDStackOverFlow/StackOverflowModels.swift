@@ -12,7 +12,6 @@ struct Question: Decodable {
     let title: String
     let question_id: Int
     let body: String?
-    // let is_answered: Bool?
     let accepted_answer_id: Int?
     let answers: [Answer]?
     let owner: ShallowUser
@@ -25,7 +24,6 @@ struct QuestionsResponse: Decodable {
 struct Answer: Decodable {
     let body: String?
     let is_accepted: Bool
-    //let score: Int
     let owner: ShallowUser
 }
 
@@ -57,3 +55,29 @@ func getProfileImage(profileImage: String, cell: UITableViewCell) {
     }.resume()
 }
 
+func cacheProfileImage(profileImage: String, imageCache: inout [String: UIImage], dispatchGroup: DispatchGroup) {
+    let imageUrl = URL(string: profileImage)
+    URLSession.shared.dataTask(with: imageUrl!) { (data, urlResponse, error) in
+        DispatchQueue.main.sync {
+            if let data = data, let image = UIImage(data: data) {
+                //image.draw(in: CGRect(x: 0, y: 0, width: 20, height: 20))
+                imageCache[profileImage] = resizeImage(image: image, newWidth: 80)
+            }
+            dispatchGroup.leave()
+        }
+    }.resume()
+}
+
+func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+    let scale = newWidth / image.size.width
+    let newHeight = image.size.height * scale
+    UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+    image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+    let newImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return newImage!
+}
+
+
+//https://developer.apple.com/documentation/dispatch/dispatchqueue
+//https://developer.apple.com/documentation/uikit/1623922-uigraphicsbeginimagecontext

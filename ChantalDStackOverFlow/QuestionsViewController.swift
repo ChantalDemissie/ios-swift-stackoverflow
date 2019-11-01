@@ -5,6 +5,7 @@ import Alamofire
 
 class QuestionsViewController: UIViewController {
     var questions: [Question] = Array()
+    var cachedProfileImages: [String: UIImage] = [:]
     var selectedQuestion: Question? = nil
 
     @IBOutlet weak var tableView: UITableView!
@@ -32,11 +33,22 @@ class QuestionsViewController: UIViewController {
                         // items is where the array of questions is in the json
                         self.questions = questionsResponse.items
                         print(self.questions)
+                        let imageLoadingDispatchGroup = DispatchGroup()
+                        for question in self.questions {
+                            if let profile_image = question.owner.profile_image {
+                                imageLoadingDispatchGroup.enter()
+                                cacheProfileImage(profileImage: profile_image,
+                                                  imageCache: &self.cachedProfileImages,
+                                                  dispatchGroup: imageLoadingDispatchGroup)
+                            }
+                        }
+                        imageLoadingDispatchGroup.notify(queue: .main) {
+                            self.tableView.reloadData()
+                        }
                     } catch {
                         print(error)
                         return
                     }
-                    self.tableView.reloadData()
                 } else {
                     print("Error: \(String(describing: response.result.error))")
                 }
@@ -75,7 +87,7 @@ extension QuestionsViewController: UITableViewDataSource {
             cell.accessoryType = .checkmark
         }
         if let profileImage = question.owner.profile_image {
-            getProfileImage(profileImage: profileImage, cell: cell)
+            cell.imageView?.image = cachedProfileImages[profileImage]
         }
         return cell
     }
