@@ -89,6 +89,13 @@ extension QuestionsViewController: UITableViewDataSource {
         if let profileImage = question.owner.profile_image {
             cell.imageView?.image = cachedProfileImages[profileImage]
         }
+        if indexPath.row % 2 == 0 {
+            // peach
+            cell.backgroundColor = UIColor(red: 255/255, green: 218/255, blue: 185/255, alpha: 1)
+        } else {
+            // pink petal
+            cell.backgroundColor = UIColor(red: 230/255, green: 183/255, blue: 190/255, alpha: 1)
+        }
         return cell
     }
     

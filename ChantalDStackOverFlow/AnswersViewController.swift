@@ -104,6 +104,8 @@ extension AnswersViewController: UITableViewDataSource {
                 cell.backgroundColor = .lightGray
             } else if indexPath.row == 1 { // body
                 cell.textLabel?.text = question.body?.htmlDecoded
+                // mint
+                    cell.backgroundColor = UIColor(red:  108/255, green: 198/255, blue: 195/255, alpha: 1)
             } else if let answers = question.answers { // row > 1
                 // first two rows are question title and body,
                 // so need to subtract 2 from row index to get answer index
@@ -115,8 +117,14 @@ extension AnswersViewController: UITableViewDataSource {
                 if let profileImage = answer.owner.profile_image {
                     cell.imageView?.image = cachedProfileImages[profileImage]
                 }
-                // peach
-                cell.backgroundColor = UIColor(red: 255/255, green: 218/255, blue: 185/255, alpha: 1)
+              
+                if indexPath.row % 2 == 0 {
+                    // peach
+                    cell.backgroundColor = UIColor(red: 255/255, green: 218/255, blue: 185/255, alpha: 1)
+                } else {
+                    // pink petal
+                    cell.backgroundColor = UIColor(red: 230/255, green: 183/255, blue: 190/255, alpha: 1)
+                }
             }
         }
         return cell
