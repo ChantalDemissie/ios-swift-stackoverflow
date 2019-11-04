@@ -16,6 +16,7 @@ class AnswersViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var questionId: Int? = nil
     var question: Question? = nil
+    var cachedProfileImages: [String: UIImage] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,11 +48,31 @@ class AnswersViewController: UIViewController {
                         // items is where the array of questions is in the json
                         self.question = questionsResponse.items.first
                         print(self.question!)
+                        let imageLoadingDispatchGroup = DispatchGroup()
+                        if let profile_image = self.question?.owner.profile_image {
+                            imageLoadingDispatchGroup.enter()
+                            cacheProfileImage(profileImage: profile_image,
+                                              imageCache: &self.cachedProfileImages,
+                                              dispatchGroup: imageLoadingDispatchGroup)
+                        }
+                        if let answers = self.question?.answers {
+                            for answer in answers {
+                                if let profile_image = answer.owner.profile_image {
+                                    imageLoadingDispatchGroup.enter()
+                                    cacheProfileImage(profileImage: profile_image,
+                                                      imageCache: &self.cachedProfileImages,
+                                                      dispatchGroup: imageLoadingDispatchGroup)
+                                }
+                            }
+                        }
+                        
+                        imageLoadingDispatchGroup.notify(queue: .main) {
+                            self.tableView.reloadData()
+                        }
                     } catch {
                         print(error)
                         return
                     }
-                    self.tableView.reloadData()
                 } else {
                     print("Error: \(String(describing: response.result.error))")
                 }
@@ -78,12 +99,11 @@ extension AnswersViewController: UITableViewDataSource {
             if indexPath.row == 0 { // title
                 cell.textLabel?.text = question.title.htmlDecoded
                 if let profileImage = question.owner.profile_image {
-                    getProfileImage(profileImage: profileImage, cell: cell)
+                    cell.imageView?.image = cachedProfileImages[profileImage]
                 }
                 cell.backgroundColor = .lightGray
             } else if indexPath.row == 1 { // body
                 cell.textLabel?.text = question.body?.htmlDecoded
-                cell.backgroundColor = UIColor(red: 255/255, green: 218/255, blue: 185/255, alpha: 1)
             } else if let answers = question.answers { // row > 1
                 // first two rows are question title and body,
                 // so need to subtract 2 from row index to get answer index
@@ -93,7 +113,7 @@ extension AnswersViewController: UITableViewDataSource {
                     cell.accessoryType = .checkmark
                 }
                 if let profileImage = answer.owner.profile_image {
-                    getProfileImage(profileImage: profileImage, cell: cell)
+                    cell.imageView?.image = cachedProfileImages[profileImage]
                 }
                 // peach
                 cell.backgroundColor = UIColor(red: 255/255, green: 218/255, blue: 185/255, alpha: 1)

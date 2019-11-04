@@ -60,7 +60,6 @@ func cacheProfileImage(profileImage: String, imageCache: inout [String: UIImage]
     URLSession.shared.dataTask(with: imageUrl!) { (data, urlResponse, error) in
         DispatchQueue.main.sync {
             if let data = data, let image = UIImage(data: data) {
-                //image.draw(in: CGRect(x: 0, y: 0, width: 20, height: 20))
                 imageCache[profileImage] = resizeImage(image: image, newWidth: 80)
             }
             dispatchGroup.leave()
