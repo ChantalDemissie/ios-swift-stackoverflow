@@ -1,2 +1,2 @@
 # ios-swift-stackoverflow
-show stack overflow questions and answers
+Created App using StackOverFlow Api to display questions and answers.
